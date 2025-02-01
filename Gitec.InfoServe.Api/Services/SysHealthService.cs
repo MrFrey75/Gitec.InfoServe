@@ -11,6 +11,8 @@ using ServiceReplyFailure = Gitec.InfoServe.CommonLib.ServiceReplyFailure;
 using ServiceType = Gitec.InfoServe.CommonLib.ServiceType;
 using StatusTypeModel = Gitec.InfoServe.CommonLib.Enumerations.StatusTypeModel;
 
+using JsonTool;
+using Gitec.InfoServe.CommonLib.JsonTool;
 namespace Gitec.InfoServe.Api.Services;
 
 public class SysHealthService : SysDataService.SysDataServiceBase
@@ -24,16 +26,30 @@ public class SysHealthService : SysDataService.SysDataServiceBase
 
         switch(request.Service)
         {
-            case ServiceType.Hardware:
-
-                json = JsonConverter<Hardware>
+            case ServiceType.HealthCheck:
+                json = JsonTools.ToJson(new HealthCheckModel
+                {
+                    Status = StatusTypeModel.Success,
+                    Message = "Health Check Successful",
+                    Details = request.Details
+                });
                 break;
-            case ServiceType.Applications:
-                json = "{ \"applications\": { \"app1\": \"App1\", \"app2\": \"App2\" } }";
+            case ServiceType.HealthCheckFailure:
+                json = JsonTools.ToJson(new HealthCheckModel
+                {
+                    Status = StatusTypeModel.Failure,
+                    Message = "Health Check Failed",
+                    Details = request.Details
+                });
                 break;
-            case ServiceType.Network:
-                json = JsonSer
-
+            default:
+                json = JsonTools.ToJson(new HealthCheckModel
+                {
+                    Status = StatusTypeModel.Failure,
+                    Message = "Service Not Found",
+                    Details = request.Details
+                });
+                break;
 
         }
 

@@ -6,9 +6,40 @@ option csharp_namespace = "Gitec.InfoServe.CommonLib";
 
 package syshealth;
 
-service SysDataService {
+service SysDataApiService {
   rpc SysDataClientServe (DeviceActionRequest) returns (ServiceReply);
 }
+
+service HardwareApiService{
+  rpc HardwareClientServe (DeviceActionRequest)v returns (ServiceReply)
+}
+
+service 
+NetworkApiService {
+  rpc NetworkClientServe (DeviceActionRequest) returns (ServiceReply);
+}
+
+service StorageApiService {
+  rpc StorageClientServe (DeviceActionRequest) returns (ServiceReply);
+}
+
+service ProcessesApiService {
+  rpc ProcessesClientServe (DeviceActionRequest) returns (ServiceReply);
+}
+
+service ApplicationsApiService {
+  rpc ApplicationsClientServe (DeviceActionRequest) returns (ServiceReply);
+}
+
+service SecurityLogsApiService {
+  rpc SecurityLogsClientServe (DeviceActionRequest) returns (ServiceReply);
+}
+
+service PowerPerformanceApiService {
+  rpc PowerPerformanceClientServe (DeviceActionRequest) returns (ServiceReply);
+}
+
+
 
 message DeviceActionRequest {
   google.protobuf.Timestamp timestamp = 1;
@@ -26,7 +57,13 @@ message ServiceReply {
     ServiceReplyPending pending = 3;
     ServiceReplySucces success = 4;
     ServiceReplyFailure failure = 5;
+    ServiceReplyComplete complete = 6;
   }
+}
+
+message ServiceReplyComplete{
+  string message = 0;
+  StatusType status = 1;
 }
 
 message ServiceReplyPending{
@@ -58,4 +95,5 @@ enum StatusType {
     PENDING = 1;
     SUCCESS = 2;
     FAILURE = 3;
+    COMPLETE = 4;
 }

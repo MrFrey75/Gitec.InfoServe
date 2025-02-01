@@ -11,6 +11,7 @@ namespace Gitec.InfoServe.CommonLib.Enumerations
         UnknownStatus = 0,
         Pending = 1,
         Success = 2,
-        Failure = 3
+        Failure = 3,
+        Complete = 4
     }
 }

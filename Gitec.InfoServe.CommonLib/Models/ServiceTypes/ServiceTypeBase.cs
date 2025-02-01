@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Gitec.InfoServe.CommonLib.Enumerations;
 
-namespace Gitec.InfoServe.CommonLib.Models.ServiceTypes;
-
-public class ServiceTypeBase
+namespace Gitec.InfoServe.CommonLib.Models
 {
-    public ServiceTypeModel ServiceType { get; set; } = ServiceTypeModel.UnknownService;
+    public class ServiceTypeBase
+    {
+        public ServiceTypeModel ServiceType { get; set; } = ServiceTypeModel.UnknownService;
+    }
 }

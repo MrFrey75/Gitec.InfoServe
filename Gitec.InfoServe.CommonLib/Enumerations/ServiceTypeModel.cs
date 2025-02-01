@@ -16,5 +16,6 @@ namespace Gitec.InfoServe.CommonLib.Enumerations
         Applications = 5,
         SecurityLogs = 6,
         PowerPerformance = 7
+        
     }
 }
