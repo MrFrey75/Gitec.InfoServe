@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "Gitec.InfoServe.Api.SystemHealthData";
+
+package SysDataApiService;
+
+service SysDataHealthApiService {
+  rpc ApplicationsApiService (ClientActionRequest) returns (ServiceReply);
+  rpc EventLogsApiService (ClientActionRequest) returns (ServiceReply);
+  rpc HardwareApiService (ClientActionRequest) returns (ServiceReply);
+  rpc NetworkApiService (ClientActionRequest) returns (ServiceReply);
+  rpc PowerPerformanceApiService (ClientActionRequest) returns (ServiceReply);
+  rpc ProcessesApiService (ClientActionRequest) returns (ServiceReply);
+  rpc SecurityLogsApiService (ClientActionRequest) returns (ServiceReply);
+  rpc StorageApiService (ClientActionRequest) returns (ServiceReply);
+}
+
+message ClientActionRequest {
+  google.protobuf.Timestamp timestamp = 1;
+  string device = 2;
+  ServiceType service = 3;
+  string data = 4;
+}
+
+message ServiceReply {
+  google.protobuf.Timestamp timestamp = 1;
+  StatusType status = 2;
+}
+
+enum ServiceType {
+  UNKNOWN = 0;
+  APPLICATIONS = 1;
+  EVENT_LOGS = 2;
+  HARDWARE = 3;
+  NETWORK = 4;
+  POWER_PERFORMANCE = 5;
+  PROCESSES = 6;
+  SECURITY_LOGS = 7;
+  STORAGE = 8;
+}
+
+enum StatusType {
+  SUCCESS = 0;
+  FAILURE = 1;
+}
+

@@ -15,7 +15,8 @@ namespace Gitec.InfoServe.CommonLib.Enumerations
         Processes = 4,
         Applications = 5,
         SecurityLogs = 6,
-        PowerPerformance = 7
+        EventLogs = 7,
+        PowerPerformance = 8
         
     }
 }

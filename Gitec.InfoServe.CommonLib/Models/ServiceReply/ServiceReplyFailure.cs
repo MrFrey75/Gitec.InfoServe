@@ -24,14 +24,4 @@ public class ServiceReplyFailure : ServiceReplyDetails
         ErrorCategory = string.Empty; // or provide a default value
         ErrorStackTrace = string.Empty; // or provide a default value
     }
-
-    public ServiceReplyFailure()
-        : base(string.Empty, string.Empty)
-    {
-        Status = StatusTypeModel.Failure;
-        ErrorMessage = string.Empty;
-        ErrorDetails = string.Empty;
-        ErrorCategory = string.Empty;
-        ErrorStackTrace = string.Empty;
-    }
 }

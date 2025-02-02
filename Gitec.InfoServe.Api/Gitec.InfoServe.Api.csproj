@@ -20,10 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!-- Reference the proto file for both server and client -->
-    <Protobuf Include="..\Gitec.InfoServe.CommonLib\Protos\syshealth.proto" GrpcServices="Both">
-      <Link>Protos\syshealth.proto</Link>
-    </Protobuf>
+
+
+    <Protobuf Include="Protos\SysDataApiService.proto" GrpcServices="Both"></Protobuf>
+   
 
   </ItemGroup>
 

@@ -8,7 +8,7 @@ using Google.Protobuf.WellKnownTypes;
 
 namespace Gitec.InfoServe.CommonLib.Models;
 
-public class DeviceActionRequestModel
+public class ClientActionRequestModel
 {
     Timestamp _timestamp = Timestamp.FromDateTime(DateTime.Now);
     public string DeviceId { get; set; } = string.Empty;
