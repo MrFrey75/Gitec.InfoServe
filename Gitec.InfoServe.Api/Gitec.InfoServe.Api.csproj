@@ -22,7 +22,7 @@
   <ItemGroup>
 
 
-    <Protobuf Include="Protos\SysDataApiService.proto" GrpcServices="Both"></Protobuf>
+    <Protobuf Include="Protos\SysDataApiService.proto" GrpcServices="Server"></Protobuf>
    
 
   </ItemGroup>

@@ -1,48 +1,88 @@
 syntax = "proto3";
 
+package Gitec.InfoServe.Grpc;
+
 import "google/protobuf/timestamp.proto";
 
-option csharp_namespace = "Gitec.InfoServe.Api.SystemHealthData";
-
-package SysDataApiService;
-
-service SysDataHealthApiService {
-  rpc ApplicationsApiService (ClientActionRequest) returns (ServiceReply);
-  rpc EventLogsApiService (ClientActionRequest) returns (ServiceReply);
-  rpc HardwareApiService (ClientActionRequest) returns (ServiceReply);
-  rpc NetworkApiService (ClientActionRequest) returns (ServiceReply);
-  rpc PowerPerformanceApiService (ClientActionRequest) returns (ServiceReply);
-  rpc ProcessesApiService (ClientActionRequest) returns (ServiceReply);
-  rpc SecurityLogsApiService (ClientActionRequest) returns (ServiceReply);
-  rpc StorageApiService (ClientActionRequest) returns (ServiceReply);
+service SysDataApiService {
+    rpc Heartbeat (G_HeartbeatPing) returns (G_HeartbeatResponse);
+    rpc SystemsHealthData (G_ClientHealthData) returns (G_ServiceReply);
 }
 
-message ClientActionRequest {
-  google.protobuf.Timestamp timestamp = 1;
-  string device = 2;
-  ServiceType service = 3;
-  string data = 4;
+// Request message for sending client health data
+message G_ClientHealthData {
+    G_DeviceData device_data = 1;    
+    G_ServiceTypeEnum service_type = 2;
+    google.protobuf.Timestamp timestamp = 3;
+    string json_payload = 4;    
 }
 
-message ServiceReply {
-  google.protobuf.Timestamp timestamp = 1;
-  StatusType status = 2;
+// Heartbeat messages
+message G_HeartbeatResponse {
+    google.protobuf.Timestamp timestamp = 1;
+    string message = 2;
 }
 
-enum ServiceType {
-  UNKNOWN = 0;
-  APPLICATIONS = 1;
-  EVENT_LOGS = 2;
-  HARDWARE = 3;
-  NETWORK = 4;
-  POWER_PERFORMANCE = 5;
-  PROCESSES = 6;
-  SECURITY_LOGS = 7;
-  STORAGE = 8;
+message G_HeartbeatPing {
+    google.protobuf.Timestamp timestamp = 1;
+    G_DeviceData device_data = 2;
 }
 
-enum StatusType {
-  SUCCESS = 0;
-  FAILURE = 1;
+// Response message for client health data
+message G_ServiceReply {
+    google.protobuf.Timestamp timestamp = 1;
+    G_ServiceTypeEnum service_type = 2;
+    oneof service_reply {
+        G_ServiceReplySuccess success = 3;
+        G_ServiceReplyFailure failure = 4;
+    }
 }
 
+// Success response message
+message G_ServiceReplySuccess {
+    string message = 1;
+    string json_payload = 2;
+}
+
+// Failure response message
+message G_ServiceReplyFailure {
+    string message = 1;
+    string error_data = 2;
+}
+
+// Enum for different API services
+enum G_ServiceTypeEnum {
+    SERVICE_TYPE_UNKNOWN = 0;
+    APPLICATIONS_API_SERVICE = 1;
+    EVENT_LOGS_API_SERVICE = 2;
+    HARDWARE_API_SERVICE = 3;
+    NETWORK_API_SERVICE = 4;
+    POWER_PERFORMANCE_API_SERVICE = 5;
+    SECURITY_LOGS_API_SERVICE = 6;
+    STORAGE_API_SERVICE = 7;
+    GENERAL_API_SERVICE = 8;
+}
+
+enum G_DeviceType{
+    DEVICE_TYPE_UNKNOWN = 0;
+    DESKTOP = 1;
+    LAPTOP = 2;
+    SERVER = 3;
+    MOBILE = 4;
+    TABLET = 5;
+    PRINTER = 6;
+}
+
+// Device data message
+message G_DeviceData {
+    string device_name = 1;
+    string serial_number = 2;
+    string ip_address = 3;
+}
+
+public enum G_StatusEnum
+{
+    UNKNOWN = 0;
+    SUCCESS = 1;
+    FAILURE = 2;
+}

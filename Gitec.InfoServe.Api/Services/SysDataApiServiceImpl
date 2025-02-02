@@ -1,0 +1,13 @@
+using Gitec.InfoServe.Grpc;
+
+namespace Gitec.InfoServe.Api.Services;
+
+public class SysDataApiServiceImpl : SysDataApiService.SysDataApiServiceBase
+{
+    private readonly ILogger<SysDataApiServiceImpl> _logger;
+
+    public SysDataApiServiceImpl(ILogger<SysDataApiServiceImpl> logger)
+    {
+        _logger = logger;
+    }
+}
